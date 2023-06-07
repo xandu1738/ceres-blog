@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/comment")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService service;

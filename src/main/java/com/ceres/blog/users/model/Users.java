@@ -3,6 +3,7 @@ package com.ceres.blog.users.model;
 import com.ceres.blog.comments.model.Comments;
 import com.ceres.blog.likes.model.Likes;
 import com.ceres.blog.posts.model.Posts;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +35,7 @@ public class Users {
     @Column(name = "password", nullable = true, length = -1)
     private String password;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Collection<Posts> posts;
     @OneToMany(mappedBy = "user")
     private Collection<Likes> likes;

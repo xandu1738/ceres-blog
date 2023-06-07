@@ -10,10 +10,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/post")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequiredArgsConstructor
 public class PostController {
     private final PostsService service;
-    @GetMapping
+    @GetMapping("/list")
     List<Posts> allPosts(){
         return service.getAll();
     }

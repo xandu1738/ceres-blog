@@ -1,7 +1,9 @@
 package com.ceres.blog.posts.model;
 
 import com.ceres.blog.comments.model.Comments;
+import com.ceres.blog.images.model.PostImage;
 import com.ceres.blog.likes.model.Likes;
+import com.ceres.blog.tags.model.PostTag;
 import com.ceres.blog.users.model.Users;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,14 +26,19 @@ public class Posts {
     @Column(name = "id", nullable = false)
     private Long id;
     @Basic
+    private String title;
+    @Basic
     @Column(name = "content", nullable = true, length = -1)
     private String content;
     @Basic
     @Column(name = "total_likes", nullable = true, length = -1)
-    private int total_likes;
+    private int totalLikes;
     @ManyToOne
     @JoinColumn(name = "user_id")
+//    @JsonIgnore
     private Users user;
+    @OneToMany(mappedBy = "post")
+    private List<PostImage> images;
     @Basic
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
@@ -41,6 +49,13 @@ public class Posts {
     private Collection<Likes> likes;
     @OneToMany(mappedBy = "post")
     private Collection<Comments> comments;
+    @ManyToMany
+    @JoinTable(
+            name = "post_tags",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<PostTag> tags;
 
     @Override
     public boolean equals(Object o) {

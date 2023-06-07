@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/like")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequiredArgsConstructor
 public class LikeController {
     private final LikeService service;

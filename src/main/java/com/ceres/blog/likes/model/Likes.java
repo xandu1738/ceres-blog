@@ -2,6 +2,7 @@ package com.ceres.blog.likes.model;
 
 import com.ceres.blog.posts.model.Posts;
 import com.ceres.blog.users.model.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +21,11 @@ public class Likes {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private Users user;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "post_id")
+    @JsonIgnore
     private Posts post;
 
     @Override
